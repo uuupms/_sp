@@ -1,0 +1,15 @@
+// DOWHILE = do STMT while (E);
+void DOWHILE() {
+    
+    int doBegin = nextLabel();   // 生成 do 迴圈開始標籤
+    int doEnd = nextLabel();     // 生成 do 迴圈結束標籤
+    emit("(L%d)\n", doBegin);    // 生成 do 開始標籤的代碼
+    STMT();                      // 執行迴圈體
+    skip("while");               // 確保是 "while"
+    skip("(");                   // 跳過左括號 "("
+    int e = E();                 // 解析條件表達式 E，並返回結果
+    emit("if not T%d goto L%d\n", e, doEnd);  // 如果條件為假，跳轉到 do 結束標籤
+    skip(")");                   // 跳過右括號 ")"
+    emit("goto L%d\n", doBegin); // 無條件跳轉到 do 開始標籤，繼續執行
+    emit("(L%d)\n", doEnd);      // 生成 do 結束標籤的代碼
+  }
