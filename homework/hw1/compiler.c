@@ -72,7 +72,7 @@ int E() {
   }
   return i1;
 }
-
+/*
 // FOR =  for (ASSIGN EXP; EXP) STMT
 
 void FOR() {
@@ -103,7 +103,7 @@ void FOR() {
 
   emit("(L%d)\n", forEnd);   // 生成 (Lx) 標籤，表示迴圈結束
 }
-
+*/
 // ASSIGN = id '=' E;
 void ASSIGN() {
   char *id = next();
@@ -145,6 +145,7 @@ void IF() {
 void DOWHILE() {
   int doBegin = nextLabel();   // 生成 do 迴圈開始標籤
   int doEnd = nextLabel();     // 生成 do 迴圈結束標籤
+  skip("do");
   emit("(L%d)\n", doBegin);    // 生成 do 開始標籤的代碼
   STMT();                      // 執行迴圈體
   skip("while");               // 確保是 "while"
@@ -152,6 +153,7 @@ void DOWHILE() {
   int e = E();                 // 解析條件表達式 E，並返回結果
   emit("if not T%d goto L%d\n", e, doEnd);  // 如果條件為假，跳轉到 do 結束標籤
   skip(")");                   // 跳過右括號 ")"
+  skip(";");
   emit("goto L%d\n", doBegin); // 無條件跳轉到 do 開始標籤，繼續執行
   emit("(L%d)\n", doEnd);      // 生成 do 結束標籤的代碼
 }
