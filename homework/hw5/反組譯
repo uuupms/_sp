@@ -1,0 +1,106 @@
+hw5.o:     file format pe-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <df>:
+   0:   55                      push   %rbp
+   1:   53                      push   %rbx
+   2:   48 83 ec 28             sub    $0x28,%rsp
+   6:   48 8d 6c 24 20          lea    0x20(%rsp),%rbp
+   b:   48 89 4d 20             mov    %rcx,0x20(%rbp)
+   f:   f2 0f 11 4d 28          movsd  %xmm1,0x28(%rbp)
+  14:   f2 0f 10 4d 28          movsd  0x28(%rbp),%xmm1
+  19:   f2 0f 10 05 20 00 00    movsd  0x20(%rip),%xmm0        # 41 <df+0x41>
+  20:   00
+  21:   f2 0f 58 c8             addsd  %xmm0,%xmm1
+  25:   66 48 0f 7e c8          movq   %xmm1,%rax
+  2a:   48 8b 55 20             mov    0x20(%rbp),%rdx
+  2e:   66 48 0f 6e c0          movq   %rax,%xmm0
+  33:   ff d2                   call   *%rdx
+  35:   66 48 0f 7e c3          movq   %xmm0,%rbx
+  3a:   48 8b 45 28             mov    0x28(%rbp),%rax
+  3e:   48 8b 55 20             mov    0x20(%rbp),%rdx
+  42:   66 48 0f 6e c0          movq   %rax,%xmm0
+  47:   ff d2                   call   *%rdx
+  49:   66 0f 28 c8             movapd %xmm0,%xmm1
+  4d:   66 48 0f 6e c3          movq   %rbx,%xmm0
+  52:   f2 0f 5c c1             subsd  %xmm1,%xmm0
+  56:   f2 0f 10 0d 20 00 00    movsd  0x20(%rip),%xmm1        # 7e <square+0xb>
+  5d:   00
+  5e:   f2 0f 5e c1             divsd  %xmm1,%xmm0
+  62:   66 48 0f 7e c0          movq   %xmm0,%rax
+  67:   66 48 0f 6e c0          movq   %rax,%xmm0
+  6c:   48 83 c4 28             add    $0x28,%rsp
+  70:   5b                      pop    %rbx
+  71:   5d                      pop    %rbp
+  72:   c3                      ret
+
+0000000000000073 <square>:
+  73:   55                      push   %rbp
+  74:   48 89 e5                mov    %rsp,%rbp
+  77:   f2 0f 11 45 10          movsd  %xmm0,0x10(%rbp)
+  7c:   f2 0f 10 45 10          movsd  0x10(%rbp),%xmm0
+  81:   f2 0f 59 c0             mulsd  %xmm0,%xmm0
+  85:   66 48 0f 7e c0          movq   %xmm0,%rax
+  8a:   66 48 0f 6e c0          movq   %rax,%xmm0
+  8f:   5d                      pop    %rbp
+  90:   c3                      ret
+
+0000000000000091 <power3>:
+  91:   55                      push   %rbp
+  92:   48 89 e5                mov    %rsp,%rbp
+  95:   f2 0f 11 45 10          movsd  %xmm0,0x10(%rbp)
+  9a:   f2 0f 10 45 10          movsd  0x10(%rbp),%xmm0
+  9f:   f2 0f 59 c0             mulsd  %xmm0,%xmm0
+  a3:   f2 0f 59 45 10          mulsd  0x10(%rbp),%xmm0
+  a8:   66 48 0f 7e c0          movq   %xmm0,%rax
+  ad:   66 48 0f 6e c0          movq   %rax,%xmm0
+  b2:   5d                      pop    %rbp
+  b3:   c3                      ret
+
+00000000000000b4 <main>:
+  b4:   55                      push   %rbp
+  b5:   48 89 e5                mov    %rsp,%rbp
+  b8:   48 83 ec 20             sub    $0x20,%rsp
+  bc:   e8 00 00 00 00          call   c1 <main+0xd>
+  c1:   f2 0f 10 05 28 00 00    movsd  0x28(%rip),%xmm0        # f1 <main+0x3d>
+  c8:   00
+  c9:   66 0f 28 c8             movapd %xmm0,%xmm1
+  cd:   48 8d 05 9f ff ff ff    lea    -0x61(%rip),%rax        # 73 <square> 
+  d4:   48 89 c1                mov    %rax,%rcx
+  d7:   e8 24 ff ff ff          call   0 <df>
+  dc:   66 48 0f 7e c0          movq   %xmm0,%rax
+  e1:   48 89 c2                mov    %rax,%rdx
+  e4:   66 48 0f 6e c2          movq   %rdx,%xmm0
+  e9:   66 0f 28 c8             movapd %xmm0,%xmm1
+  ed:   48 89 c2                mov    %rax,%rdx
+  f0:   48 8d 05 00 00 00 00    lea    0x0(%rip),%rax        # f7 <main+0x43>
+  f7:   48 89 c1                mov    %rax,%rcx
+  fa:   e8 00 00 00 00          call   ff <main+0x4b>
+  ff:   f2 0f 10 05 28 00 00    movsd  0x28(%rip),%xmm0        # 12f <main+0x7b>
+ 106:   00
+ 107:   66 0f 28 c8             movapd %xmm0,%xmm1
+ 10b:   48 8d 05 7f ff ff ff    lea    -0x81(%rip),%rax        # 91 <power3>
+ 112:   48 89 c1                mov    %rax,%rcx
+ 115:   e8 e6 fe ff ff          call   0 <df>
+ 11a:   66 48 0f 7e c0          movq   %xmm0,%rax
+ 11f:   48 89 c2                mov    %rax,%rdx
+ 122:   66 48 0f 6e c2          movq   %rdx,%xmm0
+ 127:   66 0f 28 c8             movapd %xmm0,%xmm1
+ 12b:   48 89 c2                mov    %rax,%rdx
+ 12e:   48 8d 05 10 00 00 00    lea    0x10(%rip),%rax        # 145 <main+0x91>
+ 135:   48 89 c1                mov    %rax,%rcx
+ 138:   e8 00 00 00 00          call   13d <main+0x89>
+ 13d:   b8 00 00 00 00          mov    $0x0,%eax
+ 142:   48 83 c4 20             add    $0x20,%rsp
+ 146:   5d                      pop    %rbp
+ 147:   c3                      ret
+ 148:   90                      nop
+ 149:   90                      nop
+ 14a:   90                      nop
+ 14b:   90                      nop
+ 14c:   90                      nop
+ 14d:   90                      nop
+ 14e:   90                      nop
+ 14f:   90                      nop

@@ -1,0 +1,23 @@
+#include <elf.h>
+ELF32_hdr
+
+
+a.out 檔案格式
+檔頭
+程式段
+資料段
+程式段
+
+
+分段表頭
+連結到哪一個段落
+
+ELF header
+program head table 程式表頭
+section header table 分段表頭
+
+執行時期：動態
+連結時期：靜態
+
+一個sec
+

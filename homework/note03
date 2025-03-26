@@ -1,0 +1,52 @@
+#includr main 
+
+int foobar (int a, int b, int c)
+{
+    int xx = a + 2 ;
+    int yy = 
+
+}
+
+
+gcc -S foobar.c -o foobar2.s
+
+#註解
+
+;eax <--a. eax += 2. then 
+mov eax, DWORD PTR [ebp+8] 
+add eax, 2
+mov DWORD PTR [ebp-4], eax
+
+
+int fib(int n){
+
+}
+
+pushl %ebp 
+movl %esp, %ebp
+pushl %ebx
+subl $20, %esp
+cmpl $1, 8(%ebp)
+
+
+movl 8(%ebp), %eax
+subl $1, %eax4
+movl 
+
+
+asm volatile ("addl %%ebx,%%eax;"
+    :
+
+)
+
+
+#include <unistd.h>
+int main() {
+    _write(1, "Hello, world!\n",14);
+
+}
+
+va_arg
+
+add = (int (*)(int, int)) addCode;
+printf("add(5,8)")
